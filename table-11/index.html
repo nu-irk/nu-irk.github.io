@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="refresh" content="0; url=../?table=11" />
+    <title>Стол 11 — Не усложняй</title>
+    <script>
+      const target = new URL("../", window.location.href);
+      target.searchParams.set("table", "11");
+      window.location.replace(target.href);
+    </script>
+  </head>
+  <body>
+    <p><a href="../?table=11">Открыть страницу стола 11</a></p>
+  </body>
+</html>
+
