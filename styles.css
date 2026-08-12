@@ -11,7 +11,7 @@ body { margin: 0; min-width: 320px; background: var(--ink); color: var(--ink); f
 .payment { left: 4%; top: 51%; width: 92%; height: 12.5%; }
 .yandex { left: 4%; top: 63.5%; width: 45%; height: 11%; }
 .gis { right: 4%; top: 63.5%; width: 45%; height: 11%; }
-.form { left: 4%; top: 51%; width: 45%; height: 12.5%; }
+.form { left: 4%; top: 74.5%; width: 45%; height: 12.5%; }
 .telegram { right: 4%; top: 74.5%; width: 45%; height: 12.5%; }
 .dialog { width: min(calc(100% - 28px), 480px); border: 0; padding: 0; background: transparent; }
 .dialog::backdrop { background: rgb(0 0 0 / .72); backdrop-filter: blur(4px); }
