@@ -9,6 +9,7 @@ body { margin: 0; min-width: 320px; background: var(--ink); color: var(--ink); f
 .hotspot:focus-visible { outline: 3px solid var(--lime); outline-offset: -3px; }
 .loyalty { left: 4%; top: 38.5%; width: 92%; height: 12.5%; }
 .payment { left: 4%; top: 51%; width: 92%; height: 12.5%; }
+.payment:disabled { cursor: default; }
 .yandex { left: 4%; top: 63.5%; width: 45%; height: 11%; }
 .gis { right: 4%; top: 63.5%; width: 45%; height: 11%; }
 .form { left: 4%; top: 74.5%; width: 45%; height: 12.5%; }

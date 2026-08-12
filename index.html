@@ -14,36 +14,14 @@
 
       <nav class="hotspots" aria-label="Сервисы">
         <a class="hotspot loyalty" href="https://jtaf5728.uds.app/c/join?ref=jtaf5728" target="_blank" rel="noopener noreferrer" aria-label="Оформить бонусную карту"></a>
-        <button class="hotspot payment" type="button" data-open-tables aria-label="Оплатить счёт или оставить чаевые"></button>
+        <button class="hotspot payment" type="button" data-pay-table aria-label="Оплатить счёт или оставить чаевые"></button>
         <a class="hotspot yandex" href="https://ya.cc/t/PFDEkl05Ae3kNR" target="_blank" rel="noopener noreferrer" aria-label="Оставить отзыв в Яндексе"></a>
         <a class="hotspot gis" href="https://2gis.ru/reviews/70000001039853425/addReview?utm_source=lk" target="_blank" rel="noopener noreferrer" aria-label="Оставить отзыв в 2ГИС"></a>
         <a class="hotspot telegram" href="https://t.me/+7MPlepUNmtYxYmI6" target="_blank" rel="noopener noreferrer" aria-label="Открыть группу в Telegram"></a>
         <a class="hotspot form" href="https://docs.google.com/forms/d/e/1FAIpQLSeiTU3ouHFEyhRMCRh_cpVpD_Dn5laaLdtFzP8Nx8uni8c1Rw/viewform?pli=1" target="_blank" rel="noopener noreferrer" aria-label="Заполнить анкету"></a>
       </nav>
     </main>
-
-    <dialog id="table-dialog" class="dialog" aria-labelledby="table-title">
-      <section class="dialog__panel">
-        <header class="dialog__header">
-          <div><p>ОПЛАТА И ЧАЕВЫЕ</p><h1 id="table-title">ВЫБЕРИТЕ СТОЛ</h1></div>
-          <button class="close" type="button" data-close aria-label="Закрыть">×</button>
-        </header>
-        <div class="tables" aria-label="Номера столов">
-          <button type="button" data-table="1">01</button><button type="button" data-table="2">02</button><button type="button" data-table="3">03</button><button type="button" data-table="4">04</button>
-          <button type="button" data-table="5">05</button><button type="button" data-table="6">06</button><button type="button" data-table="7">07</button><button type="button" data-table="8">08</button>
-          <button type="button" data-table="9">09</button><button type="button" data-table="10">10</button><button type="button" data-table="11">11</button><button type="button" data-table="12">12</button>
-        </div>
-      </section>
-    </dialog>
-
-    <dialog id="qr-dialog" class="dialog" aria-labelledby="qr-title">
-      <section class="dialog__panel qr-panel">
-        <header class="dialog__header"><div><p>ОПЛАТА И ЧАЕВЫЕ</p><h1 id="qr-title">СТОЛ <span id="table-number"></span></h1></div><button class="close" type="button" data-close aria-label="Закрыть">×</button></header>
-        <img id="qr-image" class="qr-image" src="" alt="QR-код для оплаты" />
-        <p class="qr-note">Наведите камеру на QR‑код, чтобы перейти к оплате.</p>
-        <button class="back" type="button" id="back-to-tables">Выбрать другой стол</button>
-      </section>
-    </dialog>
     <script src="script.js"></script>
   </body>
 </html>
+
