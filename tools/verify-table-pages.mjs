@@ -1,0 +1,29 @@
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const toolsDirectory = path.dirname(fileURLToPath(import.meta.url));
+const projectDirectory = path.dirname(toolsDirectory);
+const script = await readFile(path.join(projectDirectory, "script.js"), "utf8");
+const linkPattern = /^\s*(\d+):\s*"(https:\/\/netmonet\.co\/tip\/session\?[^"]+)",?$/gm;
+const links = Object.fromEntries(
+  [...script.matchAll(linkPattern)].map((match) => [Number(match[1]), match[2]]),
+);
+
+assert.deepEqual(Object.keys(links).map(Number), [...Array(12)].map((_, index) => index + 1));
+assert.equal(new Set(Object.values(links)).size, 12, "Ссылки Netmonet должны быть уникальными");
+
+for (let table = 1; table <= 12; table += 1) {
+  const label = String(table).padStart(2, "0");
+  const page = await readFile(
+    path.join(projectDirectory, `table-${label}`, "index.html"),
+    "utf8",
+  );
+  assert.ok(page.includes(`<body data-table="${table}">`), `Стол ${label}: не задан номер`);
+  assert.ok(page.includes('<base href="../" />'), `Стол ${label}: неверная база ресурсов`);
+  assert.ok(!page.includes("http-equiv=\"refresh\""), `Стол ${label}: остался редирект`);
+  assert.ok(page.includes(`Стол ${label} — Не усложняй`), `Стол ${label}: неверный заголовок`);
+}
+
+console.log("OK: 12 самостоятельных страниц и 12 уникальных ссылок Netmonet.");
