@@ -14,7 +14,9 @@ const paymentLinks = {
 };
 
 const paymentButton = document.querySelector("[data-pay-table]");
-const requestedTable = new URLSearchParams(window.location.search).get("table");
+const requestedTable =
+  document.body.dataset.table ||
+  new URLSearchParams(window.location.search).get("table");
 const activeTable = Object.hasOwn(paymentLinks, requestedTable) ? requestedTable : null;
 
 if (activeTable) {
