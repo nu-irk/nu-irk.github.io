@@ -28,10 +28,57 @@ if (activeTable) {
     window.location.assign(paymentLinks[activeTable]);
   });
 } else {
-  paymentButton.disabled = true;
   paymentButton.setAttribute(
     "aria-label",
-    "Оплата доступна по персональной ссылке вашего стола",
+    "Как открыть оплату счёта своего стола",
   );
+  paymentButton.addEventListener("click", () => {
+    document.querySelector("[data-table-notice]")?.showModal();
+  });
 }
 
+const introDialog = document.querySelector("[data-bonus-intro]");
+const introCloseButtons = document.querySelectorAll("[data-intro-close]");
+const introStorageKey = "nu-bonus-intro-v2";
+
+function hasSeenIntro() {
+  try {
+    return window.localStorage.getItem(introStorageKey) === "seen";
+  } catch {
+    return false;
+  }
+}
+
+function rememberIntro() {
+  try {
+    window.localStorage.setItem(introStorageKey, "seen");
+  } catch {
+    // The site remains usable when private browsing blocks local storage.
+  }
+}
+
+function closeIntro() {
+  rememberIntro();
+  if (introDialog?.open) introDialog.close();
+}
+
+if (introDialog && !hasSeenIntro()) {
+  window.requestAnimationFrame(() => introDialog.showModal());
+}
+
+introCloseButtons.forEach((button) => {
+  button.addEventListener("click", closeIntro);
+});
+
+introDialog?.addEventListener("cancel", rememberIntro);
+introDialog?.addEventListener("click", (event) => {
+  if (event.target === introDialog) closeIntro();
+});
+
+const tableNotice = document.querySelector("[data-table-notice]");
+document.querySelector("[data-table-notice-close]")?.addEventListener("click", () => {
+  tableNotice?.close();
+});
+tableNotice?.addEventListener("click", (event) => {
+  if (event.target === tableNotice) tableNotice.close();
+});
