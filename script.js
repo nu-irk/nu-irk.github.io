@@ -17,7 +17,9 @@ const paymentButton = document.querySelector("[data-pay-table]");
 const requestedTable =
   document.body.dataset.table ||
   new URLSearchParams(window.location.search).get("table");
-const activeTable = Object.hasOwn(paymentLinks, requestedTable) ? requestedTable : null;
+const activeTable = Object.prototype.hasOwnProperty.call(paymentLinks, requestedTable)
+  ? requestedTable
+  : null;
 
 if (activeTable) {
   const tableLabel = activeTable.padStart(2, "0");
@@ -26,9 +28,11 @@ if (activeTable) {
     "aria-label",
     `Оплатить счёт или оставить чаевые за столом ${tableLabel}`,
   );
-  paymentButton.addEventListener("click", () => {
-    window.location.assign(paymentLinks[activeTable]);
-  });
+  if (paymentButton.tagName !== "A") {
+    paymentButton.addEventListener("click", () => {
+      window.location.assign(paymentLinks[activeTable]);
+    });
+  }
 } else {
   paymentButton.setAttribute(
     "aria-label",

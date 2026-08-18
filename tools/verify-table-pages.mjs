@@ -24,6 +24,14 @@ for (let table = 1; table <= 12; table += 1) {
   assert.ok(page.includes('<base href="../" />'), `Стол ${label}: неверная база ресурсов`);
   assert.ok(!page.includes("http-equiv=\"refresh\""), `Стол ${label}: остался редирект`);
   assert.ok(page.includes(`Стол ${label} — Не усложняй`), `Стол ${label}: неверный заголовок`);
+  assert.ok(
+    page.includes(`href="${links[table]}" data-pay-table`),
+    `Стол ${label}: ссылка Netmonet не встроена в страницу`,
+  );
+  assert.ok(
+    !page.includes('<button class="hotspot payment"'),
+    `Стол ${label}: оплата всё ещё зависит от JavaScript`,
+  );
 }
 
 console.log("OK: 12 самостоятельных страниц и 12 уникальных ссылок Netmonet.");
