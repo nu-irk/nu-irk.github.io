@@ -7,7 +7,7 @@
     <meta name="theme-color" content="#171716" />
     <meta name="description" content="Меню, бонусная программа, отзывы и быстрые сервисы «Не усложняй»." />
     <title>Стол 02 — Не усложняй</title>
-    <link rel="stylesheet" href="styles.css?v=20260819-1" />
+    <link rel="stylesheet" href="styles.css?v=20260819-2" />
   </head>
   <body data-table="2">
     <main class="landing" aria-label="Сервисы «Не усложняй»">
@@ -15,8 +15,8 @@
 
       <nav class="hotspots" aria-label="Сервисы">
         <a class="hotspot payment" href="https://netmonet.co/tip/session?qrId=7c307886-e61a-4a15-b735-4368cae03d6f&wpid=5296049&o=4" data-pay-table aria-label="Оплатить счёт или оставить чаевые за столом 02"></a>
-        <a class="hotspot main-menu" href="assets/menu/nu-main-menu.pdf" data-menu-open data-menu-title="ОСНОВНОЕ МЕНЮ" aria-label="Открыть основное меню"></a>
-        <a class="hotspot seasonal-menu" href="assets/menu/nu-seasonal-menu.pdf" data-menu-open data-menu-title="СЕЗОННОЕ МЕНЮ" aria-label="Открыть сезонное меню"></a>
+        <a class="hotspot main-menu" href="assets/menu/nu-main-menu.pdf" data-menu-open data-menu-key="main" data-menu-title="ОСНОВНОЕ МЕНЮ" aria-label="Открыть основное меню"></a>
+        <a class="hotspot seasonal-menu" href="assets/menu/nu-seasonal-menu.pdf" data-menu-open data-menu-key="seasonal" data-menu-title="СЕЗОННОЕ МЕНЮ" aria-label="Открыть сезонное меню"></a>
         <a class="hotspot loyalty" href="https://jtaf5728.uds.app/c/join?ref=jtaf5728" target="_blank" rel="noopener noreferrer" aria-label="Оформить бонусную карту"></a>
         <a class="hotspot yandex" href="https://ya.cc/t/PFDEkl05Ae3kNR" target="_blank" rel="noopener noreferrer" aria-label="Оставить отзыв в Яндексе"></a>
         <a class="hotspot gis" href="https://2gis.ru/reviews/70000001039853425/addReview?utm_source=lk" target="_blank" rel="noopener noreferrer" aria-label="Оставить отзыв в 2ГИС"></a>
@@ -34,7 +34,14 @@
             <button type="button" data-menu-close aria-label="Закрыть меню">×</button>
           </div>
         </header>
-        <iframe class="menu-viewer__frame" data-menu-frame src="about:blank" title="Просмотр меню"></iframe>
+        <div class="menu-viewer__content" data-menu-content>
+          <img data-menu-image alt="" />
+        </div>
+        <footer class="menu-viewer__navigation">
+          <button type="button" data-menu-previous aria-label="Предыдущая страница">←</button>
+          <span data-menu-page>1 / 1</span>
+          <button type="button" data-menu-next aria-label="Следующая страница">→</button>
+        </footer>
       </div>
     </div>
 
@@ -54,6 +61,6 @@
       </div>
     </dialog>
 
-    <script src="script.js?v=20260819-1"></script>
+    <script src="script.js?v=20260819-2"></script>
   </body>
 </html>

@@ -90,41 +90,75 @@ tableNotice?.addEventListener("click", (event) => {
 });
 
 const menuViewer = document.querySelector("[data-menu-viewer]");
-const menuFrame = document.querySelector("[data-menu-frame]");
+const menuContent = document.querySelector("[data-menu-content]");
+const menuImage = document.querySelector("[data-menu-image]");
 const menuTitle = document.querySelector("[data-menu-viewer-title]");
 const menuExternal = document.querySelector("[data-menu-external]");
 const menuClose = document.querySelector("[data-menu-close]");
+const menuPrevious = document.querySelector("[data-menu-previous]");
+const menuNext = document.querySelector("[data-menu-next]");
+const menuPage = document.querySelector("[data-menu-page]");
+
+const menuImageSets = {
+  main: [
+    "assets/menu/images/main-01.webp",
+    "assets/menu/images/main-02.webp",
+    "assets/menu/images/main-03.webp",
+    "assets/menu/images/main-04.webp",
+    "assets/menu/images/main-05.webp",
+    "assets/menu/images/main-06.webp",
+  ],
+  seasonal: ["assets/menu/images/seasonal-01.webp"],
+};
+
+let activeMenuPages = [];
+let activeMenuPage = 0;
+
+function showMenuPage(index) {
+  if (!menuImage || !menuPage || activeMenuPages.length === 0) return;
+  activeMenuPage = Math.max(0, Math.min(index, activeMenuPages.length - 1));
+  menuImage.src = activeMenuPages[activeMenuPage];
+  menuImage.alt = `${menuTitle?.textContent || "Меню"}, страница ${activeMenuPage + 1}`;
+  menuPage.textContent = `${activeMenuPage + 1} / ${activeMenuPages.length}`;
+  menuPrevious.disabled = activeMenuPage === 0;
+  menuNext.disabled = activeMenuPage === activeMenuPages.length - 1;
+  menuContent?.scrollTo({ top: 0, behavior: "auto" });
+}
 
 function openMenuViewer(link) {
   const url = link.href;
   const title = link.dataset.menuTitle || "МЕНЮ";
-  if (!menuViewer || !menuFrame || !menuTitle || !menuExternal) return;
+  const pages = menuImageSets[link.dataset.menuKey] || [];
+  if (!menuViewer || !menuImage || !menuTitle || !menuExternal || pages.length === 0) return;
 
   menuTitle.textContent = title;
-  menuFrame.title = title;
-  menuFrame.src = `${url}#view=FitH&toolbar=0&navpanes=0`;
   menuExternal.href = url;
+  activeMenuPages = pages;
+  showMenuPage(0);
   menuViewer.hidden = false;
   document.body.classList.add("menu-viewer-open");
   menuClose?.focus();
 }
 
 function closeMenuViewer() {
-  if (!menuViewer || !menuFrame) return;
+  if (!menuViewer || !menuImage) return;
   menuViewer.hidden = true;
-  menuFrame.src = "about:blank";
+  menuImage.removeAttribute("src");
+  activeMenuPages = [];
   document.body.classList.remove("menu-viewer-open");
 }
 
 document.querySelectorAll("[data-menu-open]").forEach((link) => {
   link.addEventListener("click", (event) => {
-    if (!menuViewer || !menuFrame) return;
+    if (!menuViewer || !menuImage) return;
     event.preventDefault();
     openMenuViewer(link);
   });
 });
 
 menuClose?.addEventListener("click", closeMenuViewer);
+menuPrevious?.addEventListener("click", () => showMenuPage(activeMenuPage - 1));
+menuNext?.addEventListener("click", () => showMenuPage(activeMenuPage + 1));
 menuViewer?.addEventListener("click", (event) => {
   if (event.target === menuViewer) closeMenuViewer();
 });
