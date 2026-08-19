@@ -33,11 +33,15 @@ for (let table = 1; table <= 12; table += 1) {
     `Стол ${label}: оплата всё ещё зависит от JavaScript`,
   );
   assert.equal(
-    (page.match(/data-menu-open/g) || []).length,
+    (page.match(/data-menu-target/g) || []).length,
     2,
     `Стол ${label}: должны быть две кнопки меню`,
   );
-  assert.ok(page.includes("data-menu-viewer"), `Стол ${label}: нет окна просмотра меню`);
+  assert.equal(
+    (page.match(/data-menu-dialog/g) || []).length,
+    2,
+    `Стол ${label}: нет двух нативных окон меню`,
+  );
 }
 
 console.log("OK: 12 самостоятельных страниц и 12 уникальных ссылок Netmonet.");

@@ -39,11 +39,30 @@ if (activeTable) {
     "Как открыть оплату счёта своего стола",
   );
   paymentButton.addEventListener("click", () => {
-    document.querySelector("[data-table-notice]")?.showModal();
+    openDialog(document.querySelector("[data-table-notice]"));
   });
 }
 
+function openDialog(dialog) {
+  if (!dialog) return;
+  if (typeof dialog.showModal === "function") {
+    dialog.showModal();
+  } else {
+    dialog.setAttribute("open", "");
+  }
+}
+
+function closeDialog(dialog) {
+  if (!dialog) return;
+  if (typeof dialog.close === "function") {
+    dialog.close();
+  } else {
+    dialog.removeAttribute("open");
+  }
+}
+
 const introDialog = document.querySelector("[data-bonus-intro]");
+const introImage = document.querySelector("[data-intro-image]");
 const introCloseButtons = document.querySelectorAll("[data-intro-close]");
 const introStorageKey = "nu-bonus-intro-v2";
 
@@ -65,11 +84,20 @@ function rememberIntro() {
 
 function closeIntro() {
   rememberIntro();
-  if (introDialog?.open) introDialog.close();
+  closeDialog(introDialog);
 }
 
-if (introDialog && !hasSeenIntro()) {
-  window.requestAnimationFrame(() => introDialog.showModal());
+if (introDialog && introImage && !hasSeenIntro()) {
+  let introScheduled = false;
+  const showIntro = () => {
+    if (introScheduled) return;
+    introScheduled = true;
+    window.requestAnimationFrame(() => openDialog(introDialog));
+  };
+  introImage.addEventListener("load", showIntro, { once: true });
+  introImage.addEventListener("error", showIntro, { once: true });
+  introImage.src = introImage.dataset.src;
+  if (introImage.complete) showIntro();
 }
 
 introCloseButtons.forEach((button) => {
@@ -83,86 +111,50 @@ introDialog?.addEventListener("click", (event) => {
 
 const tableNotice = document.querySelector("[data-table-notice]");
 document.querySelector("[data-table-notice-close]")?.addEventListener("click", () => {
-  tableNotice?.close();
+  closeDialog(tableNotice);
 });
 tableNotice?.addEventListener("click", (event) => {
-  if (event.target === tableNotice) tableNotice.close();
+  if (event.target === tableNotice) closeDialog(tableNotice);
 });
 
-const menuViewer = document.querySelector("[data-menu-viewer]");
-const menuContent = document.querySelector("[data-menu-content]");
-const menuImage = document.querySelector("[data-menu-image]");
-const menuTitle = document.querySelector("[data-menu-viewer-title]");
-const menuExternal = document.querySelector("[data-menu-external]");
-const menuClose = document.querySelector("[data-menu-close]");
-const menuPrevious = document.querySelector("[data-menu-previous]");
-const menuNext = document.querySelector("[data-menu-next]");
-const menuPage = document.querySelector("[data-menu-page]");
+const menuButtons = document.querySelectorAll("[data-menu-target]");
+const menuDialogs = document.querySelectorAll("[data-menu-dialog]");
+let activeMenuButton = null;
 
-const menuImageSets = {
-  main: [
-    "assets/menu/images/main-01.webp",
-    "assets/menu/images/main-02.webp",
-    "assets/menu/images/main-03.webp",
-    "assets/menu/images/main-04.webp",
-    "assets/menu/images/main-05.webp",
-  ],
-  seasonal: ["assets/menu/images/seasonal-01.webp"],
-};
-
-let activeMenuPages = [];
-let activeMenuPage = 0;
-
-function showMenuPage(index) {
-  if (!menuImage || !menuPage || activeMenuPages.length === 0) return;
-  activeMenuPage = Math.max(0, Math.min(index, activeMenuPages.length - 1));
-  menuImage.src = activeMenuPages[activeMenuPage];
-  menuImage.alt = `${menuTitle?.textContent || "Меню"}, страница ${activeMenuPage + 1}`;
-  menuPage.textContent = `${activeMenuPage + 1} / ${activeMenuPages.length}`;
-  menuPrevious.disabled = activeMenuPage === 0;
-  menuNext.disabled = activeMenuPage === activeMenuPages.length - 1;
-  menuContent?.scrollTo({ top: 0, behavior: "auto" });
+function openMenu(button) {
+  const dialog = document.querySelector(`#${button.dataset.menuTarget}`);
+  if (!dialog) return;
+  activeMenuButton = button;
+  openDialog(dialog);
+  document.body.style.overflow = "hidden";
 }
 
-function openMenuViewer(link) {
-  const url = link.href;
-  const title = link.dataset.menuTitle || "МЕНЮ";
-  const pages = menuImageSets[link.dataset.menuKey] || [];
-  if (!menuViewer || !menuImage || !menuTitle || !menuExternal || pages.length === 0) return;
-
-  menuTitle.textContent = title;
-  menuExternal.href = url;
-  activeMenuPages = pages;
-  showMenuPage(0);
-  menuViewer.hidden = false;
-  document.body.classList.add("menu-viewer-open");
-  menuClose?.focus();
+function closeMenu(dialog) {
+  closeDialog(dialog);
+  document.body.style.overflow = "";
+  activeMenuButton?.focus({ preventScroll: true });
+  activeMenuButton = null;
 }
 
-function closeMenuViewer() {
-  if (!menuViewer || !menuImage) return;
-  menuViewer.hidden = true;
-  menuImage.removeAttribute("src");
-  activeMenuPages = [];
-  document.body.classList.remove("menu-viewer-open");
-}
+menuButtons.forEach((button) => {
+  button.addEventListener("click", () => openMenu(button));
+});
 
-document.querySelectorAll("[data-menu-open]").forEach((link) => {
-  link.addEventListener("click", (event) => {
-    if (!menuViewer || !menuImage) return;
-    event.preventDefault();
-    openMenuViewer(link);
+menuDialogs.forEach((dialog) => {
+  dialog.querySelector("[data-menu-close]")?.addEventListener("click", () => closeMenu(dialog));
+  dialog.addEventListener("close", () => {
+    document.body.style.overflow = "";
   });
-});
-
-menuClose?.addEventListener("click", closeMenuViewer);
-menuPrevious?.addEventListener("click", () => showMenuPage(activeMenuPage - 1));
-menuNext?.addEventListener("click", () => showMenuPage(activeMenuPage + 1));
-menuViewer?.addEventListener("click", (event) => {
-  if (event.target === menuViewer) closeMenuViewer();
-});
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && menuViewer && !menuViewer.hidden) {
-    closeMenuViewer();
-  }
+  dialog.addEventListener("cancel", () => {
+    document.body.style.overflow = "";
+  });
+  dialog.addEventListener("click", (event) => {
+    const bounds = dialog.getBoundingClientRect();
+    const clickedOutside =
+      event.clientX < bounds.left ||
+      event.clientX > bounds.right ||
+      event.clientY < bounds.top ||
+      event.clientY > bounds.bottom;
+    if (clickedOutside) closeMenu(dialog);
+  });
 });
