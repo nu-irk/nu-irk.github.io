@@ -8,7 +8,7 @@ from PIL import Image, ImageFilter
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 QR_DIRECTORY = PROJECT_ROOT / "QR_PNG_NEW"
-QR_REVISION = "20260818-2"
+QR_REVISION = "20260819-5"
 
 
 def decode(image: Image.Image) -> str | None:

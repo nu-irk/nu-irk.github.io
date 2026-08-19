@@ -42,6 +42,11 @@ for (let table = 1; table <= 12; table += 1) {
     2,
     `Стол ${label}: нет двух нативных окон меню`,
   );
+  assert.ok(
+    page.includes("data-bonus-intro") &&
+      page.includes('data-src="assets/nu-bonus-info-v2.webp'),
+    `Стол ${label}: нет приветственного информационного окна`,
+  );
 }
 
-console.log("OK: 12 самостоятельных страниц и 12 уникальных ссылок Netmonet.");
+console.log("OK: 12 страниц, 12 ссылок Netmonet и информационное окно на каждом столе.");
