@@ -22,5 +22,7 @@ assert.ok(!html.includes("data-menu-previous"), "Постраничная нав
 assert.ok(script.includes('typeof dialog.showModal === "function"'), "Нет нативного открытия dialog");
 assert.ok(script.includes('dialog.setAttribute("open", "")'), "Нет запасного режима старых телефонов");
 assert.ok(html.includes('data-src="assets/nu-bonus-info-v2.webp'), "Бонусная заставка должна загружаться только при необходимости");
+assert.ok(html.includes("data-intro-open"), "Нет повторного вызова правил бонусной программы");
+assert.ok(script.includes("function openIntro()"), "Повторный вызов бонусного окна не реализован");
 
 console.log("OK: оба меню работают по лёгкой мобильной схеме «Густого».");

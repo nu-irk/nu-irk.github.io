@@ -44,7 +44,8 @@ for (let table = 1; table <= 12; table += 1) {
   );
   assert.ok(
     page.includes("data-bonus-intro") &&
-      page.includes('data-src="assets/nu-bonus-info-v2.webp'),
+      page.includes('data-src="assets/nu-bonus-info-v2.webp') &&
+      page.includes("data-intro-open"),
     `Стол ${label}: нет приветственного информационного окна`,
   );
 }

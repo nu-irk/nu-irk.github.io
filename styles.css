@@ -7,15 +7,16 @@ body { margin: 0; min-width: 320px; min-height: 100vh; overflow-x: hidden; backg
 .hotspots { position: absolute; inset: 0; }
 .hotspot { position: absolute; display: block; margin: 0; border: 0; border-radius: 0; padding: 0; background: transparent; color: transparent; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
 .hotspot:focus-visible { outline: 3px solid white; outline-offset: -4px; }
-.payment { left: 6%; top: 23.5%; width: 88%; height: 12.5%; }
+.payment { left: 6%; top: 23.2%; width: 88%; height: 12.3%; }
 .payment:disabled { cursor: default; }
-.main-menu { left: 6%; top: 37.2%; width: 88%; height: 9.2%; }
-.seasonal-menu { left: 6%; top: 47.8%; width: 88%; height: 6.8%; }
-.loyalty { left: 6%; top: 55.2%; width: 88%; height: 13%; }
-.yandex { left: 6%; top: 71.2%; width: 41.5%; height: 10.6%; }
-.gis { right: 6%; top: 71.2%; width: 41.5%; height: 10.6%; }
-.form { left: 6%; top: 83.7%; width: 88%; height: 7%; }
-.telegram { left: 6%; top: 91.2%; width: 88%; height: 7%; }
+.main-menu { left: 6%; top: 36.75%; width: 86.5%; height: 8.8%; }
+.seasonal-menu { left: 6%; top: 47.15%; width: 88%; height: 6.25%; }
+.loyalty { left: 6%; top: 54.55%; width: 88%; height: 12.05%; }
+.bonus-info-button { z-index: 2; left: 64%; top: 62.68%; width: 27%; height: 3.55%; }
+.yandex { left: 6%; top: 70%; width: 41.5%; height: 10.25%; }
+.gis { right: 6%; top: 70%; width: 41.5%; height: 10.25%; }
+.form { left: 6%; top: 83.5%; width: 88%; height: 6.8%; }
+.telegram { left: 6%; top: 91.5%; width: 88%; height: 6.35%; }
 
 .menu-dialog { width: min(100%, 760px); max-width: none; height: 100dvh; max-height: none; margin: 0 auto; border: 0; padding: 0; background: var(--black); color: white; overscroll-behavior: contain; }
 .menu-dialog[open] { animation: menu-enter 180ms ease-out both; }

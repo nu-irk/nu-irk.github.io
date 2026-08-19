@@ -64,6 +64,7 @@ function closeDialog(dialog) {
 const introDialog = document.querySelector("[data-bonus-intro]");
 const introImage = document.querySelector("[data-intro-image]");
 const introCloseButtons = document.querySelectorAll("[data-intro-close]");
+const introOpenButtons = document.querySelectorAll("[data-intro-open]");
 const introStorageKey = "nu-bonus-intro-v2";
 
 function hasSeenIntro() {
@@ -87,18 +88,36 @@ function closeIntro() {
   closeDialog(introDialog);
 }
 
-if (introDialog && introImage && !hasSeenIntro()) {
-  let introScheduled = false;
+function openIntro() {
+  if (!introDialog || !introImage) return;
+
+  let handled = false;
   const showIntro = () => {
-    if (introScheduled) return;
-    introScheduled = true;
-    window.requestAnimationFrame(() => openDialog(introDialog));
+    if (handled) return;
+    handled = true;
+    window.requestAnimationFrame(() => {
+      if (!introDialog.open) openDialog(introDialog);
+    });
   };
+
+  if (introImage.getAttribute("src")) {
+    showIntro();
+    return;
+  }
+
   introImage.addEventListener("load", showIntro, { once: true });
   introImage.addEventListener("error", showIntro, { once: true });
   introImage.src = introImage.dataset.src;
   if (introImage.complete) showIntro();
 }
+
+if (!hasSeenIntro()) {
+  openIntro();
+}
+
+introOpenButtons.forEach((button) => {
+  button.addEventListener("click", openIntro);
+});
 
 introCloseButtons.forEach((button) => {
   button.addEventListener("click", closeIntro);
