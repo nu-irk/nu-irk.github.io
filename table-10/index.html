@@ -7,7 +7,7 @@
     <meta name="theme-color" content="#171716" />
     <meta name="description" content="Меню, бонусная программа, отзывы и быстрые сервисы «Не усложняй»." />
     <title>Стол 10 — Не усложняй</title>
-    <link rel="stylesheet" href="styles.css?v=20260818-2" />
+    <link rel="stylesheet" href="styles.css?v=20260819-1" />
   </head>
   <body data-table="10">
     <main class="landing" aria-label="Сервисы «Не усложняй»">
@@ -15,8 +15,8 @@
 
       <nav class="hotspots" aria-label="Сервисы">
         <a class="hotspot payment" href="https://netmonet.co/tip/session?qrId=e0ec61c0-bf2d-413d-a766-4a95c70c8da6&wpid=5296049&o=4" data-pay-table aria-label="Оплатить счёт или оставить чаевые за столом 10"></a>
-        <a class="hotspot main-menu" href="assets/menu/nu-main-menu.pdf" target="_blank" rel="noopener noreferrer" aria-label="Открыть основное меню в PDF"></a>
-        <a class="hotspot seasonal-menu" href="assets/menu/nu-seasonal-menu.pdf" target="_blank" rel="noopener noreferrer" aria-label="Открыть сезонное меню в PDF"></a>
+        <a class="hotspot main-menu" href="assets/menu/nu-main-menu.pdf" data-menu-open data-menu-title="ОСНОВНОЕ МЕНЮ" aria-label="Открыть основное меню"></a>
+        <a class="hotspot seasonal-menu" href="assets/menu/nu-seasonal-menu.pdf" data-menu-open data-menu-title="СЕЗОННОЕ МЕНЮ" aria-label="Открыть сезонное меню"></a>
         <a class="hotspot loyalty" href="https://jtaf5728.uds.app/c/join?ref=jtaf5728" target="_blank" rel="noopener noreferrer" aria-label="Оформить бонусную карту"></a>
         <a class="hotspot yandex" href="https://ya.cc/t/PFDEkl05Ae3kNR" target="_blank" rel="noopener noreferrer" aria-label="Оставить отзыв в Яндексе"></a>
         <a class="hotspot gis" href="https://2gis.ru/reviews/70000001039853425/addReview?utm_source=lk" target="_blank" rel="noopener noreferrer" aria-label="Оставить отзыв в 2ГИС"></a>
@@ -24,6 +24,19 @@
         <a class="hotspot form" href="https://docs.google.com/forms/d/e/1FAIpQLSeiTU3ouHFEyhRMCRh_cpVpD_Dn5laaLdtFzP8Nx8uni8c1Rw/viewform?pli=1" target="_blank" rel="noopener noreferrer" aria-label="Заполнить анкету"></a>
       </nav>
     </main>
+
+    <div class="menu-viewer" data-menu-viewer hidden role="dialog" aria-modal="true" aria-labelledby="menu-viewer-title">
+      <div class="menu-viewer__window">
+        <header class="menu-viewer__header">
+          <strong id="menu-viewer-title" data-menu-viewer-title>МЕНЮ</strong>
+          <div class="menu-viewer__actions">
+            <a href="assets/menu/nu-main-menu.pdf" data-menu-external target="_blank" rel="noopener noreferrer">ОТКРЫТЬ ОТДЕЛЬНО</a>
+            <button type="button" data-menu-close aria-label="Закрыть меню">×</button>
+          </div>
+        </header>
+        <iframe class="menu-viewer__frame" data-menu-frame src="about:blank" title="Просмотр меню"></iframe>
+      </div>
+    </div>
 
     <dialog class="bonus-intro" data-bonus-intro aria-label="Информация о бонусной программе UDS">
       <div class="bonus-intro__art">
@@ -41,6 +54,6 @@
       </div>
     </dialog>
 
-    <script src="script.js?v=20260818-2"></script>
+    <script src="script.js?v=20260819-1"></script>
   </body>
 </html>
