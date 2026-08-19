@@ -12,7 +12,7 @@ from qrcode.constants import ERROR_CORRECT_M
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 PNG_DIR = PROJECT_ROOT / "QR_PNG_NEW"
 PUBLIC_BASE_URL = "https://nu-irk.github.io"
-QR_REVISION = "20260818-2"
+QR_REVISION = "20260819-5"
 
 
 def load_netmonet_links() -> dict[int, str]:
