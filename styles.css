@@ -31,7 +31,7 @@ body.menu-viewer-open { overflow: hidden; }
 }
 .menu-viewer__window {
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr) auto;
   width: min(100%, 820px);
   height: min(96dvh, 1100px);
   overflow: hidden;
@@ -71,7 +71,42 @@ body.menu-viewer-open { overflow: hidden; }
 }
 .menu-viewer__actions button:hover,
 .menu-viewer__actions button:focus-visible { background: var(--ink); color: white; outline: 0; }
-.menu-viewer__frame { display: block; width: 100%; height: 100%; border: 0; background: white; }
+.menu-viewer__content {
+  overflow: auto;
+  overscroll-behavior: contain;
+  background: #777;
+  text-align: center;
+  touch-action: pan-x pan-y pinch-zoom;
+}
+.menu-viewer__content img {
+  display: block;
+  width: min(100%, 1003px);
+  height: auto;
+  min-height: 1px;
+  margin: 0 auto;
+  background: white;
+}
+.menu-viewer__navigation {
+  display: grid;
+  grid-template-columns: 64px 1fr 64px;
+  align-items: center;
+  min-height: 52px;
+  background: var(--ink);
+  color: white;
+  text-align: center;
+}
+.menu-viewer__navigation span { font-size: 12px; font-weight: 900; letter-spacing: .1em; }
+.menu-viewer__navigation button {
+  align-self: stretch;
+  border: 0;
+  background: var(--orange);
+  color: var(--ink);
+  font: 900 24px/1 Arial, sans-serif;
+  cursor: pointer;
+}
+.menu-viewer__navigation button:disabled { opacity: .28; cursor: default; }
+.menu-viewer__navigation button:not(:disabled):hover,
+.menu-viewer__navigation button:not(:disabled):focus-visible { background: white; outline: 0; }
 
 .bonus-intro {
   width: min(calc(100% - 18px), 430px);
