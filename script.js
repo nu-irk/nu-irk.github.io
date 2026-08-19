@@ -88,3 +88,48 @@ document.querySelector("[data-table-notice-close]")?.addEventListener("click", (
 tableNotice?.addEventListener("click", (event) => {
   if (event.target === tableNotice) tableNotice.close();
 });
+
+const menuViewer = document.querySelector("[data-menu-viewer]");
+const menuFrame = document.querySelector("[data-menu-frame]");
+const menuTitle = document.querySelector("[data-menu-viewer-title]");
+const menuExternal = document.querySelector("[data-menu-external]");
+const menuClose = document.querySelector("[data-menu-close]");
+
+function openMenuViewer(link) {
+  const url = link.href;
+  const title = link.dataset.menuTitle || "МЕНЮ";
+  if (!menuViewer || !menuFrame || !menuTitle || !menuExternal) return;
+
+  menuTitle.textContent = title;
+  menuFrame.title = title;
+  menuFrame.src = `${url}#view=FitH&toolbar=0&navpanes=0`;
+  menuExternal.href = url;
+  menuViewer.hidden = false;
+  document.body.classList.add("menu-viewer-open");
+  menuClose?.focus();
+}
+
+function closeMenuViewer() {
+  if (!menuViewer || !menuFrame) return;
+  menuViewer.hidden = true;
+  menuFrame.src = "about:blank";
+  document.body.classList.remove("menu-viewer-open");
+}
+
+document.querySelectorAll("[data-menu-open]").forEach((link) => {
+  link.addEventListener("click", (event) => {
+    if (!menuViewer || !menuFrame) return;
+    event.preventDefault();
+    openMenuViewer(link);
+  });
+});
+
+menuClose?.addEventListener("click", closeMenuViewer);
+menuViewer?.addEventListener("click", (event) => {
+  if (event.target === menuViewer) closeMenuViewer();
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && menuViewer && !menuViewer.hidden) {
+    closeMenuViewer();
+  }
+});

@@ -35,13 +35,17 @@ for (let table = 1; table <= 12; table += 1) {
   };
   const document = {
     title: "",
-    body: { dataset: { table: String(table) } },
+    body: {
+      dataset: { table: String(table) },
+      classList: { add() {}, remove() {} },
+    },
     querySelector(selector) {
       return selector === "[data-pay-table]" ? paymentButton : null;
     },
     querySelectorAll() {
       return [];
     },
+    addEventListener() {},
   };
   const window = {
     location: {
