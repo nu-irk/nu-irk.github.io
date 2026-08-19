@@ -7,8 +7,7 @@ from PIL import Image, ImageFilter
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-QR_DIRECTORY = PROJECT_ROOT / "QR_PNG_NEW"
-QR_REVISION = "20260819-5"
+QR_DIRECTORY = PROJECT_ROOT / "QR_FINAL_12_TABLES"
 
 
 def decode(image: Image.Image) -> str | None:
@@ -18,8 +17,8 @@ def decode(image: Image.Image) -> str | None:
 
 for table in range(1, 13):
     label = f"{table:02d}"
-    path = QR_DIRECTORY / f"NU-table-{label}-NEW.png"
-    expected = f"https://nu-irk.github.io/table-{label}/?qr={QR_REVISION}"
+    path = QR_DIRECTORY / f"NU-table-{label}.png"
+    expected = f"https://nu-irk.github.io/table-{label}/"
     original = Image.open(path)
     variants = (
         original,
