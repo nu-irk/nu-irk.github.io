@@ -106,7 +106,6 @@ const menuImageSets = {
     "assets/menu/images/main-03.webp",
     "assets/menu/images/main-04.webp",
     "assets/menu/images/main-05.webp",
-    "assets/menu/images/main-06.webp",
   ],
   seasonal: ["assets/menu/images/seasonal-01.webp"],
 };
