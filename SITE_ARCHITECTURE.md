@@ -13,6 +13,16 @@
 - PDF остаются резервными ссылками.
 - Информационное окно UDS присутствует на главной и каждой странице стола. Картинка загружается только при первом показе на устройстве, а кнопка «О бонусах» позволяет открыть окно повторно в любое время.
 
+## Актуальные публичные ссылки
+
+- Сайт: `https://nu-irk.github.io/`
+- Страницы столов: `https://nu-irk.github.io/table-01/` … `https://nu-irk.github.io/table-12/`
+- Анкета: `https://docs.google.com/forms/d/e/1FAIpQLSdluiobVjQp4-z7L02f8gP-yhy0BBA8sUa_uVPSC_g9CGmSMA/viewform`
+- Карта гостя UDS: `https://jtaf5728.uds.app/c/join?ref=jtaf5728`
+- Отзыв в Яндексе: `https://ya.cc/t/PFDEkl05Ae3kNR`
+- Отзыв в 2ГИС: `https://2gis.ru/reviews/70000001039853425/addReview?utm_source=lk`
+- Telegram: `https://t.me/+7MPlepUNmtYxYmI6`
+
 ## Неизменяемые правила
 
 1. Не объединять этот проект с сайтом «Густой» и не переносить файлы между репозиториями.
@@ -33,4 +43,4 @@ python tools/generate-table-qrs.py
 python tools/verify-qr-images.py
 ```
 
-Актуальные QR-коды находятся в `QR_PNG_NEW`, общий архив — `QR_PNG_NEW_12_tables.zip`.
+Актуальные QR-коды находятся в `QR_FINAL_12_TABLES`, общий архив — `NU_QR_FINAL_12_TABLES.zip`. QR содержат постоянные адреса без версионных параметров, поэтому после обновления содержимого сайта их не требуется перепечатывать.

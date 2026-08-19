@@ -10,9 +10,8 @@ from qrcode.constants import ERROR_CORRECT_M
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-PNG_DIR = PROJECT_ROOT / "QR_PNG_NEW"
+QR_DIR = PROJECT_ROOT / "QR_FINAL_12_TABLES"
 PUBLIC_BASE_URL = "https://nu-irk.github.io"
-QR_REVISION = "20260819-5"
 
 
 def load_netmonet_links() -> dict[int, str]:
@@ -73,15 +72,15 @@ def make_qr(url: str, svg_path: Path, png_path: Path) -> None:
 
 
 def main() -> None:
-    PNG_DIR.mkdir(parents=True, exist_ok=True)
+    QR_DIR.mkdir(parents=True, exist_ok=True)
     links = load_netmonet_links()
     rows: list[dict[str, str]] = []
 
     for table in range(1, 13):
         label = f"{table:02d}"
-        public_url = f"{PUBLIC_BASE_URL}/table-{label}/?qr={QR_REVISION}"
-        svg_path = PNG_DIR / f"NU-table-{label}-NEW.svg"
-        png_path = PNG_DIR / f"NU-table-{label}-NEW.png"
+        public_url = f"{PUBLIC_BASE_URL}/table-{label}/"
+        svg_path = QR_DIR / f"NU-table-{label}.svg"
+        png_path = QR_DIR / f"NU-table-{label}.png"
         make_qr(public_url, svg_path, png_path)
         rows.append(
             {
@@ -93,7 +92,7 @@ def main() -> None:
             }
         )
 
-    with (PNG_DIR / "table-links.csv").open(
+    with (QR_DIR / "table-links.csv").open(
         "w", encoding="utf-8-sig", newline=""
     ) as handle:
         writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
@@ -101,24 +100,25 @@ def main() -> None:
         writer.writerows(rows)
 
     report = [
-        "НЕ УСЛОЖНЯЙ — НОВЫЕ QR-коды столов",
-        "Использовать только файлы с пометкой NEW из этой папки.",
+        "НЕ УСЛОЖНЯЙ — ФИНАЛЬНЫЕ QR-коды столов",
+        "Использовать файлы из этой папки для печати и размещения.",
         "Каждый QR ведёт на самостоятельную страницу своего стола.",
+        "Адреса постоянные: обновления сайта не требуют перепечатывать QR-коды.",
         "",
     ]
     report.extend(
         f"Стол {row['table']}: {row['public_url']}" for row in rows
     )
-    (PNG_DIR / "README.txt").write_text(
+    (QR_DIR / "README.txt").write_text(
         "\n".join(report) + "\n", encoding="utf-8"
     )
 
-    zip_path = PROJECT_ROOT / "QR_PNG_NEW_12_tables.zip"
+    zip_path = PROJECT_ROOT / "NU_QR_FINAL_12_TABLES.zip"
     with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED) as archive:
-        for path in sorted(PNG_DIR.iterdir()):
+        for path in sorted(QR_DIR.iterdir()):
             archive.write(path, arcname=path.name)
 
-    print("Созданы 12 новых QR-кодов на отдельные страницы столов.")
+    print("Созданы 12 финальных QR-кодов на постоянные страницы столов.")
 
 
 if __name__ == "__main__":
