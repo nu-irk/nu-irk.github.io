@@ -20,7 +20,8 @@ assert.ok(css.includes(".menu-viewer[hidden]"), "Окно не скрывает�
 assert.ok(css.includes("position: fixed"), "Окно не закреплено поверх страницы");
 assert.ok(script.includes('event.preventDefault()'), "Прямая загрузка PDF не перехватывается");
 assert.ok(script.includes('"assets/menu/images/main-01.webp"'), "Нет первой страницы меню");
-assert.ok(script.includes('"assets/menu/images/main-06.webp"'), "Нет последней страницы меню");
+assert.ok(script.includes('"assets/menu/images/main-05.webp"'), "Нет пятой страницы меню");
+assert.ok(!script.includes('"assets/menu/images/main-06.webp"'), "Устаревшая шестая страница всё ещё подключена");
 assert.ok(script.includes('"assets/menu/images/seasonal-01.webp"'), "Нет сезонного меню");
 assert.ok(script.includes('menuImage.src = activeMenuPages[activeMenuPage]'), "Страница не загружается в окно");
 assert.ok(script.includes('menuImage.removeAttribute("src")'), "Изображение не выгружается при закрытии");
