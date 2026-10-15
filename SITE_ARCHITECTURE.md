@@ -19,8 +19,8 @@
 - Страницы столов: `https://nu-irk.github.io/table-01/` … `https://nu-irk.github.io/table-12/`
 - Анкета: `https://docs.google.com/forms/d/e/1FAIpQLSdluiobVjQp4-z7L02f8gP-yhy0BBA8sUa_uVPSC_g9CGmSMA/viewform`
 - Карта гостя UDS: `https://jtaf5728.uds.app/c/join?ref=jtaf5728`
-- Отзыв в Яндексе: `https://ya.cc/t/PFDEkl05Ae3kNR`
-- Отзыв в 2ГИС: `https://2gis.ru/reviews/70000001039853425/addReview?utm_source=lk`
+- Отзыв в Яндексе: `https://script.google.com/macros/s/AKfycbyOZW18NKWU2cC0dncPu3vKZGXSKYnDY9d5EtJTxkVakoxZkrouiKzgNjH-c8jDASsN/exec?venue=ne`
+- Отзыв в 2ГИС: `https://script.google.com/macros/s/AKfycbxvBjxqu_ogivV1IofZFEJoC3DivIA7C601wgMpLQ6WXMsSnpFwrmDjXv1Aj1Iu9yRYvQ/exec?venue=ne`
 - Telegram: `https://t.me/+7MPlepUNmtYxYmI6`
 
 ## Неизменяемые правила
